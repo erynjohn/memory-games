@@ -3,31 +3,23 @@ import Nav from './nav';
 import Image from 'react-bootstrap/Image';
 import Characters from './characters.json';
 import { Container, Row, Col } from 'react-bootstrap';
+import Shuffle from 'react-shuffle';
 
 
 class Character extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            clickCount: 0
+            isclicked: false
+
         }
 
     }
 
-    // check if image is clicked
-    handleClick = (id) => {
-
-        this.setState((prevState, props) => ({
-            clickCount: prevState.clickCount
-        }), () => {
-            console.log(this.state.clickCount)
-            if (this.state.clickCount >= 2) {
-                console.log("try again")
-            }
-
-        }
-        )
-    }
+    handleClick = ((event) => {
+        let click = event.target.id
+        console.log(click)
+    })
     render() {
         return (
             <>
@@ -36,7 +28,8 @@ class Character extends Component {
                         <Row>
                             <Col xs={4} md={11}>
                 {Characters.map((character) => {
-                    return <Image width={250}  src={character.image} key={character.id} rounded />
+                    return <Image onClick= {this.handleClick}
+                 id={character.id} width={250}  src={character.image} key={character.id} rounded />
                             })}
                             </Col>
                         </Row>
